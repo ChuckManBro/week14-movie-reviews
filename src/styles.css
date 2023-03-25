@@ -139,6 +139,12 @@ textarea {
 		grid-template-columns: 1fr;
 		justify-items: center;
 	}
+
+	#cover-img {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
 	textarea {
 		height: 10em;
 	}
