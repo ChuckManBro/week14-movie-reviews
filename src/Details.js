@@ -4,19 +4,19 @@ import starHalf from './images/stars/half.svg';
 import starEmpty from './images/stars/empty.svg';
 
 //COMPONENT - Details
-export default function Details({ details }) {
+export default function Details({ selectedMovie }) {
 	return (
 		<div id="container-details">
 			<div id="container-details-info">
-				<h1>{details.title}</h1>
-				<StarAverage reviews={details.reviews} />
-				<h3>{details.year}</h3>
-				<h3>{details.genre}</h3>
-				<h3>{details.mpaRating}</h3>
-				<h3>{details.duration}</h3>
-				<p>{details.synopsis}</p>
+				<h1>{selectedMovie.title}</h1>
+				<StarAverage reviews={selectedMovie.reviews} />
+				<h3>{selectedMovie.year}</h3>
+				<h3>{selectedMovie.genre}</h3>
+				<h3>{selectedMovie.mpaRating}</h3>
+				<h3>{selectedMovie.duration}</h3>
+				<p>{selectedMovie.synopsis}</p>
 			</div>
-			<img id="cover-img" src={require(`./images/covers/${details.coverImg}`)}></img>
+			<img id="cover-img" src={require(`./images/covers/${selectedMovie.coverImg}`)}></img>
 		</div>
 	);
 }

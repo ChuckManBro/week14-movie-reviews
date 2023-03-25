@@ -4,6 +4,7 @@ import FormReview from './FormReview';
 import MovieList from './MovieList';
 import Reviews from './Reviews';
 
+// All Movie Data
 let data = [
 	{
 		id: '0',
@@ -317,25 +318,38 @@ let data = [
 	},
 ];
 
+// Starter variables
+let selectionIndex = 0;
+
 //COMPONENT - App
 function App() {
-	const [selection, setSelection] = useState(0);
-	const [postedReviews, setPostedReviews] = useState(data[selection].reviews);
+	const [selectedMovie, setSelectedMovie] = useState(data[selectionIndex]);
+	const [selectedReviews, setSelectedReviews] = useState(data[selectionIndex].reviews);
 
+	// When a new movie is selected
+	function updateSelection(id) {
+		// setSelectedMovie and setSelectedReviews to the matching id
+		const newSelection = data.find(movie => movie.id === id);
+		setSelectedMovie(newSelection);
+		setSelectedReviews(newSelection.reviews);
+
+		// Set selectionIndex to the newly selected movie
+		selectionIndex = data.indexOf(newSelection);
+	}
+
+	// When a new review is submitted
 	function appendReview(rating, text) {
-		console.log(`The rating is ${rating}, with a text of: ${text}`); //TEST
-		const newReview = [
-			{
-				id: 100,
-				starRating: rating,
-				text: text,
-			},
-			...data[selection].reviews,
-		];
-		data[selection].reviews = newReview;
-		setPostedReviews(newReview);
+		const newReview = {
+			id: 102,
+			starRating: rating,
+			text: text,
+		};
 
-		console.log(data[selection].reviews);//TEST
+		// Append to the top of selectedReviews so it will appear immediately
+		setSelectedReviews([newReview, ...selectedReviews]);
+
+		// Unshift to the array in data so it will appear later
+		data[selectionIndex].reviews.unshift(newReview);
 	}
 
 	return (
@@ -343,12 +357,12 @@ function App() {
 			<div id="title-gap"></div>
 
 			<div id="container-main">
-				<MovieList selection={selection} setSelection={setSelection} />
+				<MovieList selectedMovie={selectedMovie} updateSelection={updateSelection} />
 
 				<div id="container-display">
-					<Details details={data[selection]} />
+					<Details selectedMovie={selectedMovie} />
 					<FormReview appendReview={appendReview} />
-					<Reviews selection={selection} postedReviews={postedReviews} />
+					<Reviews selectedReviews={selectedReviews} />
 				</div>
 			</div>
 		</div>

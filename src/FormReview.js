@@ -7,19 +7,27 @@ import starEmpty from './images/stars/empty.svg';
 export default function FormReview({ appendReview }) {
 	const [text, setText] = useState('');
 	const [rating, setRating] = useState(0);
+	const textLength = text.length;
+	const textMax = 400;
 
 	function handleSubmit() {
+		//Run the appendReview function in App.js with the new values
 		appendReview(rating, text);
+
+		//Clear the form upon submit
 		setRating(0);
 		setText('');
 	}
 
 	return (
 		<div id="form-review">
-			<h2>Write a Reel Review</h2>
+			<div id="form-header">
+				<h2>Write a Reel Review</h2>
+				<span id="word-count">({textMax - textLength})</span>
+			</div>
 			<textarea
-				rows="4"
-				maxLength="400"
+				maxLength={textMax}
+				// placeholder="Write your own Reel Review..."
 				value={text}
 				onChange={event => setText(event.target.value)}
 			></textarea>
