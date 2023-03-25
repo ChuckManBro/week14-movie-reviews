@@ -1,4 +1,8 @@
-# Week-14 - Reel Reviews
+# Promineo Week-14: Reel Reviews
+
+### A movie review website, made with ReactJS
+
+![Screenshot of Chuck's 'Reel Reviews' movie review website](./src/images/reel-reviews-sample-screenshot.png)
 
 ### Assignment Instructions
 
